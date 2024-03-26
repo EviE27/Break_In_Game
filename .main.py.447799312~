@@ -1,0 +1,124 @@
+import map
+
+my_map = map.game_map
+
+game_map = [
+        ["start_tile", "side_door", "side_door", "side_door" ], 
+        ["celler_entrance", "wear_house", "wear_house", "office_room" ],
+        ["celler_entrance", "celler", "celler", "celler"]
+]
+
+map_tiles = {
+"side_door" : {
+            "discription" :""" you are walking along the side of the building gray wear 
+            house. You come aross a door with a dirty window. You hear a sound and run 
+            and hid behind a bush""",
+            "items" :["door handel", "crow bar", ]
+            },
+
+"celler_entrance" : {
+            "discription" :"""as you go down the frount of the building you come across
+            a locked meadel trap door you look and the lock has a number code, you look 
+            in frount of you and see a half coverd wooden crate.""",
+            "items" : ["keypad"] ,
+            },
+
+"wear_house" : {
+        "discription" :"""You enter into the dark wear house. You look around to see many 
+        larger wooden crates. You see a door at the end the line of crates would. 
+        This is the room that you need to go to retive the plans. To the side of you you
+        see the side door 
+        """
+        
+    
+}
+}
+
+
+charactor_position = ""
+colx = 0
+rowy = 0
+
+
+def move_forward():
+    global colx
+    global rowy 
+    colx = colx + 1 
+    print(colx)
+    print(rowy)
+
+
+def move_backward():
+    global colx
+    global rowy 
+    colx = colx - 1 
+    print(colx)
+    print(rowy)
+
+
+def move_up():
+    global colx
+    global rowy 
+    rowy = rowy - 1 
+    print(colx)
+    print(rowy)
+
+
+def move_down():
+    global colx
+    global rowy
+    colx = colx + 1 
+    print(colx)
+    print(rowy)
+
+
+def actions():
+    global colx
+    global rowy 
+    direction_choice = True
+    while direction_choice:
+        try:
+            direction_choice = False
+            move = input("""To move up type 'U', to go down type 'D', to go backwards 
+type 'B', or 'F' to go forwards then hit enter to move. 
+if you want to quit type 'q':""") 
+            if move == "q":
+                main()
+                direction_choice = True
+            else:
+                if move.lower() == "f":
+                    move_forward()
+                elif move.lower() == "b": # moves charactor backwards
+                    move_backward()
+                elif move.lower() == "d":
+                    move_down()
+                elif move.lower() == "u":
+                    move_up()  
+                else:
+                    print("Invalid input. That is not a direction.")
+                    direction_choice = True
+        except :
+            print("invalid input;")
+
+
+
+
+def room_position():
+     global charactor_position
+     charactor_position = game_map[colx][rowy]
+     print(charactor_position)
+     if charactor_position == "side_door":
+        print(side_door)
+    
+
+
+
+
+def main():
+   # print(my_map)
+    actions()
+    room_position()
+
+
+
+main()
