@@ -14,24 +14,32 @@ def move_forward():
     global colx
     global rowy 
     colx = colx + 1 
+    print(colx)
+    print(rowy)
 
 
 def move_backward():
     global colx
     global rowy 
     colx = colx - 1 
+    print(colx)
+    print(rowy)
 
 
 def move_up():
     global colx
     global rowy 
     rowy = rowy - 1
+    print(colx)
+    print(rowy)
 
 
 def move_down():
     global colx
     global rowy
     rowy = rowy + 1 
+    print(colx)
+    print(rowy)
 
 
 def actions():
