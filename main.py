@@ -1,46 +1,45 @@
+from tabulate import tabulate
 import map
+import movment
 
-my_map = map.game_map
+from movment import rowy
+from movment import colx
+from movment import actions
+
+map_file = 'map.txt'
+
+charactor_position = {}
+
 
 game_map = [
         ["start_tile", "side_door", "side_door", "side_door" ], 
         ["celler_entrance", "wear_house", "wear_house", "office_room" ],
         ["celler_entrance", "celler", "celler", "celler"]
 ]
-
-#def movement():
-   
-
-
+ 
 
 map_tiles = {
-            "start_tile": {"discription":["""You are at the docks were the enemys 
-            wear house is. You have been informed that no one should be inside right now.
-             """],
+            "start_tile": {"discription":["""You are at the docks were the
+enemys wear house is. You have been informed that no one should be inside right now."""]
+,
             "look around": ["""In very direction you look you see shiping crates. 
 There are not cars or people in sight. """],
                           },
             "side_door" : {"discription" :[""" \n you are walking along the side of the
-gray wear house. Their is a door with a dirty window."""],
-            "look around" : ["You just see some birds pecking at the groud"],  
-            "look through window" :["""you try to look throught the window but it is 
-too dirty for you to see anything, but the door appers to be unlocked"""],             
-            "items" :["door padlock", "paper" ],
-            "paper" :"door padlock code 6879"
+gray wear house. Their is a door with a dirty window."""],        
                            
             },
 
             "celler_entrance" : {
-            "discription" :["""\n as you go down the frount of the building you come across
-a meadel trap door. This must be one of the entrances to the celler. """],
+            "discription" :["""\n as you go down the frount of the building you come
+across a meadel trap door. This must be one of the entrances to the celler. """],
             "look around" : ["you found a rock but you can't pick it up"] ,
             },
 
             "wear_house" : {
         "discription" :["""\n You enter into the dark wear house. You look around to see
-many larger wooden crates. You see a door at the end of the line of crates. 
-This is the room that you need to go to retive the plans. To the side 'up' ofyou you
-see the side door. To the other side 'down' of you there is a lader
+many large wooden crates. You see a door at the end of the line of crates. 
+
         """],
             "look around" : ["""you look at the wooden crates seeing some are open. The
 crates are filled to the brim with jelly beans """],
@@ -57,116 +56,23 @@ case on it that says PLANS"""]
 }
 
 
-
-
-charactor_position = {}
-colx = 0
-rowy = 0
-map_highty_max = 2
-map_highty_min = 0
-map_width_max = 3
-map_width_min = 0
-        
-
-
-def move_forward():
-    global colx
-    global rowy 
-    colx = colx + 1 
-    #print(colx)
-   # print(rowy)
-
-
-def move_backward():
-    global colx
-    global rowy 
-    colx = colx - 1 
-    #print(colx)
-    #print(rowy)
-
-
-def move_up():
-    global colx
-    global rowy 
-    rowy = rowy - 1
-    #print(colx)
-    #print(rowy)
-
-
-def move_down():
-    global colx
-    global rowy
-    rowy = rowy + 1 
-    #print(colx)
-    #print(rowy)
-
-
-def actions():
-    global colx
-    global rowy 
-    direction_choice = True
-    while direction_choice:
-        try:
-            direction_choice = False
-            move = input("""\n move options 'U', 'D', 'B', 'F' or 'q' to quit:""") 
-            if move == "q":
-                main()
-                direction_choice = True
-            else:
-                if move.lower() == "f":
-                    move_forward()
-                    if colx > map_width_max:
-                        print("End of the map. Please chose new direction")
-                        colx = colx - 1
-                        direction_choice = True
-                    else:
-                        direction_choice = False
-                elif move.lower() == "b": 
-                    move_backward()
-                    if colx < map_width_min:
-                        print("End of the map. Please chose new direction")
-                        colx = 0
-                        direction_choice = True
-                    else:
-                        direction_choice = False
-                elif move.lower() == "d":
-                    move_down()
-                    if rowy > map_highty_max :
-                        print("End of the map. Please chose new direction")
-                        rowy = 0
-                        direction_choice = True
-                    else:
-                        direction_choice = False
-                elif move.lower() == "u":
-                    move_up()
-                    if rowy < map_highty_min :
-                        print("End of the map. Please chose new direction")
-                        rowy = 0
-                        direction_choice = True
-                    else:
-                        direction_choice = False    
-                else:
-                    print("Invalid input. That is not a direction.")
-                    direction_choice = True
-        except:
-            print("invalid input;")
-
-
 def room_position():
-     global charactor_position
-     charactor_position.update(map_tiles[game_map[rowy][colx]])
-     print(charactor_position["discription"])
+    """prints the discription of the room the player is in"""
+    global charactor_position
+    charactor_position.update(map_tiles[game_map[rowy][colx]])
+    print(charactor_position["discription"])
         
         
-
 def look_around():
-     global charactor_position
-     print(charactor_position["look around"])
+    """The player is given more info on the area they are in"""
+    global charactor_position
+    print(charactor_position["look around"])
 
 
 def tile_screen():
+    """begining screen to explain to the player how to play the game"""
     print("""Hello player. You have been recruted to break in to the enemys base to
-steal their plans for how they want to take over the city. your movement options 'U' to
+steal their plans for how they want to take over the city. Your movement options 'U' to
 go up, 'D'to go down, 'B' to go backwards, or 'F' to go forwards.
 Type the letter then hit enter to move. If you want to quit type 'q' 
     """)
@@ -181,20 +87,23 @@ Type the letter then hit enter to move. If you want to quit type 'q'
             exit()
         else:
             print("Invalid input, please input c or q")
-    
+
+        
 def main():
+    """the game is run in this function"""
     play = True
     while play:
-        room_move = input("""\n if you want to look around in this area type 'look' 
-        to move type 'move' to the next: """)
+        room_move = input("""\n if you want to look around in this area type 'look'to 
+move type 'move' to the next: """)
         room_position()
         if  room_move == 'move':
             actions()
             room_position()
         elif room_move == 'look':
             look_around()
-        
 
+        
+#map.export_map() 
+#map.read_map()
 tile_screen()
-room_position()
 main()
