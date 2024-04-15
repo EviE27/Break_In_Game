@@ -8,6 +8,7 @@ map_highty_min = 0
 map_width_max = 3
 map_width_min = 0
 
+movment = ["u", "d", "b", "f", "quit"]
 
 """movement funtions to move the player around"""
 def move_forward():
@@ -50,9 +51,12 @@ def actions():
     direction_choice = True
     while direction_choice:
         try:
-            direction_choice = False
-            move = input("""\n move options 'U', 'D', 'B', 'F' or 'q' to quit:""") 
-            if move == "q":
+            print("""\n move options:""")
+            for moves in movment:
+                print(f"*{moves}")
+            move = input(""" choice:""")
+                #direction_choice = True
+            if move == "quit":
                 print("Thank you for playing")
                 exit()
             else:
@@ -93,3 +97,4 @@ def actions():
                     direction_choice = True
         except:
             print("invalid input")
+
