@@ -6,9 +6,11 @@
 # version: 3
 #####################################################################
 
+import map
+import movment
+import objects
 #from map import export_map, read_map
-
-from movment import actions, room_position, look_around
+#from movment import actions, room_position, look_around, inspect_item
 
 
 game_map = [
@@ -17,13 +19,9 @@ game_map = [
         ["celler_entrance", "celler", "celler", "celler"]
 ]
 
-move_opt = [ "look", "move"]
-
+move_opt = [ "look", "move", "map"]
 map_file = 'map.txt'
-
 charactor_position = {}
-
-
 
 
 def tile_screen():
@@ -55,17 +53,21 @@ def main():
             for opt in move_opt:
                 print(f"*{opt}")
             room_move = input("""choice: """)
-            if  room_move == 'move':
-                actions()
-                room_position()
+            if  room_move == 'move': 
+                movment.actions()
+                movment.room_position()
             elif room_move == 'look':
-                look_around()
+                movment.look_around() 
+            elif room_move == 'map':
+                map.export_map() 
+                map.read_map() 
+                
         except:
             print("invalid input, plase select option")
 #chang so prints in list and gives movement options with out having to chose move first
 
         
-#map.export_map() 
-#map.read_map()
+
 #tile_screen()
-main()
+#main()
+movment.inspect_item()
