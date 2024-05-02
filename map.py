@@ -30,7 +30,7 @@ gray wear house. Their is a door with a dirty window."""],
             },
 
             "celler_entrance" : {
-            "discription" :["""\n as you go down the frount of the building you come
+            "discription" :[""" as you go down the frount of the building you come
 across a meadel trap door. This must be one of the entrances to the celler. """],
             "look around" : ["you found a rock but you can't pick it up"] ,
             },

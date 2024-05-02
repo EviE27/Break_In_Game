@@ -5,9 +5,35 @@
 # Coder: Eve Olson
 # version: 2
 #####################################################################
-import objects 
-
-
+#import objects 
+#########################################################
+#module: odjects
+#########################################################
+"""This module contains items that the charactor can pick up and use
+along with key and passcode used to get through to other rooms.
+"""
+#########################################################
+""" make action for explor and pick up"""
+#list of object if the palyer explors the room and then thye can select 
+odjects = { 
+            "paper" : {"discription" : "There is a code on the paper 7863",
+                       "location": [1, 0],
+                       "code" : "7863",
+                      },
+     
+          "celler door" : {"discription" : """ The door is locked... but it has a
+          cobination lock""",
+                           "location" : [0, 1] and [0, 2],
+                           "requierment" : ["code"]
+                             },
+ 
+          "case" : {"discription" :""" on the table there is a case has PLANS writen on 
+it. """,
+                   " location" : [1, 2] and [2, 2] and [3, 2],
+                   },
+                   
+                    
+                    }
 colx = 0
 rowy = 0
 map_highty_max = 2
@@ -15,6 +41,7 @@ map_highty_min = 0
 map_width_max = 3
 map_width_min = 0
 
+options = ["yes", "no"]
 movment = ["u", "d", "b", "f", "quit"]
 charactor_position = {}
 map_tiles = {
@@ -30,7 +57,7 @@ gray wear house. Their is a door with a dirty window, and a note on the ground""
 
     "celler_entrance" : {
     "discription" :[""" as you go down the frount of the building you come
-across a meadel trap door. This must be one of the entrances to the celler. """],
+across a metal trap door. This must be one of the entrances to the celler. """],
     "look around" : ["you found a rock but you can't pick it up"] ,
     },
 
@@ -55,8 +82,12 @@ game_map = [
 ]
 inventory = []
 
+
 def access_inventory():
-    print(f"*{inventory}")
+    print(inventory)
+    #for inv in inventory:
+        #print(f"*{inv}")
+        
 
 """movement funtions to move the player around"""
 def move_forward():
@@ -107,12 +138,36 @@ def look_around():
 
 
 def inspect_item(): 
-    global charactor_position
-    print(object.keys())
-    print("objects")
-    
-
-
+    global charactor_position, rowy, colx, objects, inventory, map_tiles, game_map
+    object_found = False
+    for object in odjects:
+        object_rowy = odjects[object]['location'][0]
+        object_colx =  odjects[object]['location'][1]
+        if object_rowy == rowy and object_colx == colx:
+            print(odjects[object]['discription'])
+            for op in options:    
+                print((f"*{op}"))
+            ask = input ("do you want to put this in your inventory:")
+            if ask == "yes":
+                inventory.append(object)
+                print(" your inventory:")
+                print(inventory)
+                object_found = True
+            elif ask == "no":
+                pass   
+        if object_found:
+            for item in inventory:
+                if item == "celler door":
+                    # add celler door function
+                    print("")
+                elif item == "paper":
+                    #add paper function
+                    #actions()
+                    print("")
+                elif item == "case":
+                    print("YAY!!!You found the case.")
+                    # add 
+                    
 def actions():
     """print the players movement options and prevents the player form moving off the 
     map."""
